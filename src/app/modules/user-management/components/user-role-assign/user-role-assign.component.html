@@ -1,0 +1,106 @@
+<form [formGroup]="UserRoleAssignForm">
+    <div class="send-request">
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="setOfCheckedId.size === 0"
+        [nzLoading]="loading"
+        (click)="saveRequest()"
+      >
+        Submit
+      </button>
+      <span>Selected {{ setOfCheckedId.size }} items</span>
+    </div>
+    
+    
+    <div class="row mb-5">
+      <div class="col-lg-2">
+        <label >User Role</label>
+        <div>
+        <nz-select
+          nzAllowClear
+          formControlName="ROLE"
+          (ngModelChange)="LoadAssignRoleList($event)"
+          nzPlaceHolder="Select Role"
+          [nzCustomTemplate]="defaultTemplate"
+          nzSize="default"
+        >
+          <nz-option *ngFor="let item of roleList" [nzLabel]="item.ROLE_DESCR" [nzValue]="item.ROLE_ID"></nz-option>
+        </nz-select>
+        <ng-template #defaultTemplate let-selected>
+          {{ selected.nzLabel }}
+        </ng-template>
+        <div>
+        <small class="text-danger"
+        *ngIf="(commonFormControl.ROLE.touched || submitted) && commonFormControl.ROLE.errors?.required">
+        Role is required
+      </small>
+    </div>
+      </div>
+    </div>
+      <div class="col-lg-4 " >
+        <label class="custom-label">Search</label>
+        <div>
+        <input
+          formControlName="SEARCH"
+          nz-input
+          placeholder="search here"
+          nzSize="default"
+          (keyup)="onSearchInputChange($event)"
+        />
+    </div>
+    </div>
+    </div>
+    
+    <nz-table
+      #rowSelectionTable
+      nzShowSizeChanger
+      [nzData]="allMenu"
+      nzSize="small"
+      [nzPageSize]="200"
+      (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+    >
+      <thead>
+        <tr>
+          <th
+            [nzSelections]="listOfSelection"
+            [(nzChecked)]="checked"
+            [nzDisabled]="checkboxDisable"
+            [nzIndeterminate]="indeterminate"
+            (nzCheckedChange)="onAllChecked($event)"
+          ></th>
+          <th>No</th>
+          <th>Menu Description</th>
+          <th>Menu Url</th>
+          <th>Parent Menu Id</th>
+          <th>Menu Id</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data; let i = index">
+          <td
+            [nzChecked]="setOfCheckedId.has(data.MENU_ITEM_ID)"
+            (nzCheckedChange)="onItemChecked(data.MENU_ITEM_ID, $event)"
+          ></td>
+          <td>{{ i+1 }}</td>
+          <td>{{ data.MENU_DESCRIPTION }}</td>
+          <td>{{ data.MENU_URL }}</td>
+          <td>{{ data.PARENT_MENU_ITEM_ID }}</td>
+          <td>{{ data.MENU_ITEM_ID }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <div class="send-request-left">
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="setOfCheckedId.size === 0"
+        [nzLoading]="loading"
+        (click)="saveRequest()"
+      >
+        Submit
+      </button>
+      <span>Selected {{ setOfCheckedId.size }} items</span>
+    </div>
+    </form>
+    

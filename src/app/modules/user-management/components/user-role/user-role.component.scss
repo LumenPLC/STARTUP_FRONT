@@ -1,0 +1,50 @@
+.form-ddl {
+    color: var(--bs-gray-700) !important;
+    transition: color 0.2s ease !important;
+  }
+
+  .font-ddl {
+    font-weight: 400 !important;
+  }
+
+  .fw-bolder {
+    font-weight: 600 !important;
+  }
+  .fw-bold {
+    font-weight:400  !important;
+}
+.fw-tab-due {
+  font-weight:350  !important;
+}
+
+  .fw-noFile {
+    font-weight: 300 !important;
+    font-size: 24px;
+  }
+
+  video {
+    width: 30%;
+    height: auto;
+  }
+
+
+  .demo-loadmore-list {
+    min-height: 350px;
+  }
+  .loadmore {
+    text-align: center;
+    margin-top: 12px;
+    height: 32px;
+    line-height: 32px;
+  }
+
+  .demo-infinite-container {
+    height: 600px;
+    
+  }
+
+  
+  .custom-input {
+    width: 100%; /* You can adjust the width as needed */
+    padding: 5px; /* Add padding for spacing */
+  }
